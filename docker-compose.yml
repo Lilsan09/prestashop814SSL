@@ -36,7 +36,7 @@ services:
       - ./modules:/var/www/html/modules
       - ./themes:/var/www/html/themes
       - ./override:/var/www/html/override
-      - ./docker/apache:/etc/apache2/sites-available/ssl #activer la persistence de la configuration apache
+      - ./apache:/etc/apache2/sites-available/ssl #activer la persistence de la configuration apache
 
     environment:
       - PS_DEV_MODE=1
