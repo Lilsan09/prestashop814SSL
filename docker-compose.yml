@@ -17,7 +17,7 @@ services:
 
   # SOURCE : myself-DOCKERFILE
   prestashop:
-    container_name: tryprestashop814
+    container_name: myContainerName
     build:
       context: .
       dockerfile: Dockerfile
@@ -25,8 +25,8 @@ services:
     networks:
       - prestashop
     ports:
-      - 80:80
-      - 443:443
+      - 80:80 # Exposer le port 80 pour HTTP
+      - 443:443 # Exposer le port 443 pour HTTPS
     links:
       - mariadb:mariadb
     depends_on:
@@ -36,6 +36,8 @@ services:
       - ./modules:/var/www/html/modules
       - ./themes:/var/www/html/themes
       - ./override:/var/www/html/override
+      - ./docker/apache:/etc/apache2/sites-available/ssl #activer la persistence de la configuration apache
+
     environment:
       - PS_DEV_MODE=1
       - PS_INSTALL_AUTO=0
@@ -63,6 +65,7 @@ services:
 
 networks:
   prestashop:
+
 
 volumes:
   db_data:
